@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css?family=JetBrains+Mono");
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  color: whitesmoke;
+  background-color: #1c1c22;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+h2 {
+  margin-top: 0;
+  color: #00ff99;
+  line-height: 2;
+}
+
+p {
+  font-size: 16px;
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+ul,
+ol {
+  line-height: 2;
+}
+
+.dark-container{
+  background-color: #1c1c22;
+  border-bottom: 1px solid #ccc;
+  padding: 40px;
+}
+
+.lime{
+  color: #00ff99;
+}
+
+/* Navigation Bar Styling */
+
+.nav-links,.course-code {
+  margin: auto;
+}
+
+.navbar {
+  background-color: rgba(75, 75, 75, 0.818);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: inherit;
+  height: 60px;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  color: #00ff99;
+}
+
+.navbar a:active {
+  color: #00ff99;
+  border-bottom: 2px solid #00ff99;
+}
+
+/* General CSS */
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.text {
+  flex: 1;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* About page */
+.about {
+  padding: 40px;
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+}
+
+.features {
+  padding: 40px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+.about h2 {
+  margin-top: 0;
+  color: #00ff99;
+}
+
+#screenshot{
+  max-width: 700px;
+  margin-right: 80px;
+  padding-bottom: 20px;
+}
+
+/*footer*/
+
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+/* Button */
+/* From Uiverse.io by adamgiebl */
+.button {
+  --green: #00ff99;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(
+    to right,
+    rgba(27, 253, 156, 0.1) 1%,
+    transparent 40%,
+    transparent 60%,
+    rgba(27, 253, 156, 0.1) 100%
+  );
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4),
+    0 0 9px 3px rgba(27, 253, 156, 0.1);
+  margin: 20px;
+}
+
+.button:hover {
+  color: #00ff99;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6),
+    0 0 9px 3px rgba(27, 253, 156, 0.2);
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform 0.4s ease-in-out;
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    rgba(27, 253, 156, 0.1) 40%,
+    rgba(27, 253, 156, 0.1) 60%,
+    transparent 100%
+  );
+}
+
+.button:hover:before {
+  transform: translateX(6em);
+}
+
+
+/*
+img {
+  width: 80vw;
+  height: auto;
+  max-width: 600px;
+  max-height: 80vh;
+}
+
+a {
+  text-decoration: none;
+}*/

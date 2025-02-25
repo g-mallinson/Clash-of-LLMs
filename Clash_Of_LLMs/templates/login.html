@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='game.css') }}"> 
+  <script src="{{ url_for('static', filename='login.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="custom-topic">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="custom-topic">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="button-container">
+          <button type="button" class="button" onclick="handleLogin()">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

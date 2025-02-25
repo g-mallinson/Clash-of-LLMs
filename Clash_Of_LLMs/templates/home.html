@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block head %}
+  <link rel="stylesheet" href="{{url_for('static', filename='home.css')}}">
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="title">
+      <h1>Clash of LLMs</h1>
+      <div class="subtitle">
+        Explore the Clash of LLMs: Simulate the Spread of Information in Real
+        Time
+      </div>
+      <div class="button-container">
+        <a href="{{url_for('game')}}" class="button">
+          <span class="hover-text">Start</span>
+        </a>
+        <a href="{{url_for('about')}}" class="button">
+          <span class="hover-text">Learn More</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

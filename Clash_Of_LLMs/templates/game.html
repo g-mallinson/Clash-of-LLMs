@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% block head %}
+  <link rel="stylesheet" href="{{url_for('static', filename='game.css')}}">
+  <script src="{{url_for('static', filename='game.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+{% endblock %}
+{% block content %}
+    <!-- Instructions Section -->
+    <div class="dark-container instructions">
+        <h2>INSTRUCTIONS</h2>
+        <ol>
+            <li>Select an LLM for each team.</li>
+            <li>Configure graph parameters and click "Generate Network" or upload your own network.</li>
+            <li>Click "Next Turn" to start the simulation and observe how the information spreads.</li>
+        </ol>
+        <p>(Optional). Choose 'AUTO' mode if you want the simulation to run automatically.</p>
+    </div>
+
+    <!-- PARTICIPANTS Section -->
+    <div id="participants-section">
+        <!-- Red Team Section -->
+        <div class="team-section" id="red-participant">
+            <h2 class="team-label-red">
+                Red Team <span class="ai-label" id="red-ai-label">AI</span>
+            </h2>
+            <div class="fill-in">
+                The Red Team is responsible for creating and spreading misleading or false
+                information, with the objective to sway public opinion.
+            </div>
+            <div class="parameter-row">
+                <label for="red-topic-label">Model:</label>
+                <select id="red-model-dropdown" class="model-select">
+                    <option value="gemini-1.0-pro" selected>Gemini 1.0 Pro</option>
+                    <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    <option value="gpt-4o-mini">ChatGPT 4o Mini</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+
+            <!-- Red Team's Topic -->
+            <div class="parameter-row">
+                <label for="red-topic-input">Topic:</label>
+                <select id="red-topic-input" class="parameter-input" onchange="handleCustomTopic('red')">
+                    <option value="Voting is bad">Voting is bad</option>
+                    <option value="Climate change is a hoax">Climate change is a hoax</option>
+                    <option value="Recycling is useless">Recycling is useless</option>
+                    <option value="Custom">Custom</option>
+                </select>
+            </div>
+            <div id="red-custom-topic" class="custom-topic" style="display: none;">
+                <input type="text" id="red-custom-input" placeholder="Enter custom topic for Red Team" oninput="validateCustomTopic('red')" />
+                <p id="red-custom-warning" class="warning-message" style="display: none;">Topic cannot exceed 12 words.</p>
+                <p>Topics must be a statement.</p>
+            </div>
+        </div> <!-- Closing Red Team Section -->
+
+        <!-- Green Team Section -->
+        <div class="team-section" id="green-team-section">
+            <h2 class="team-label-green">Green Team</h2>
+            <div class="fill-in">
+                The Green Team represents the general public, whose opinions and actions are influenced by the information they receive from the Red and Blue Teams.
+            </div>
+
+            <!-- Graph Configuration -->
+            <div class="parameter-row">
+                <label for="model-select-label">Graph Type:</label>
+                <select id="graph-type" class="model-select" onchange="handleUpdatedGraphType()">
+                    <option value="erdos_renyi" selected>Erdos Renai</option>
+                    <option value="barabasi_albert">Barabási–Albert</option>
+                    <option value="watts_strogatz">Watts–Strogatz</option>
+                </select>
+            </div>
+            <!-- Global Parameters -->
+            <div class="parameter-row">
+                <label for="number-of-nodes">Number of Nodes <i>n</i></label>
+                <input id="number-of-nodes" class="parameter-input" type="number" min="1" max="50" value="25" placeholder="n">
+            </div>
+            <div class="parameter-row">
+                <label for="uncertainty-spread">Uncertainty Spread</label>
+                <input id="uncertainty-spread" class="parameter-input" type="number" min="0" max="1" step="0.01" value="1.00" placeholder="0.0-1.0">
+            </div>
+            <!-- Erdos Renyi Parameters (default) -->
+            <div class="parameter-row">
+                <label for="probability">Probability of Connection <i>p</i></label>
+                <input id="probability" class="parameter-input" type="number" min="0" max="1" step="0.01" value="0.2" placeholder="p">
+            </div>
+            <!-- Barabási–Albert Parameters -->
+            <div class="parameter-row" style="display: none;">
+                <label for="initial-connections">Initial Node Connection Count <i>m</i></label>
+                <input id="initial-connections" class="parameter-input" type="number" min="0" max="5" step="1" value="2" placeholder="m">
+            </div>
+            <!-- Watts–Strogatz Parameters -->
+            <div class="parameter-row" style="display: none;">
+                <label for="neighbour-connections">Neighbour Connection Count <i>k</i></label>
+                <input id="neighbour-connections" class="parameter-input" type="number" min="0" max="10" step="1" value="4" placeholder="k">
+            </div>
+            <div class="parameter-row" style="display: none;">
+                <label for="rewire-probability">Probability of Connection Rewiring <i>p</i></label>
+                <input id="rewire-probability" class="parameter-input" type="number" min="0" max="1" step="0.01" value="0.1" placeholder="p">
+            </div>
+
+            <div class="parameter-row">
+                <button class="model-select" id="generate-network-button" onclick="generateNetwork()">Generate Network</button>
+                <button class="model-select" id="upload-network-button" onclick="uploadNetwork()">Upload Network</button>
+            </div>
+        </div> <!-- Closing Green Team Section -->
+
+        <!-- Blue Team Section -->
+        <div class="team-section" id="blue-participant">
+            <h2 class="team-label-blue">
+                Blue Team <span class="ai-label" id="blue-ai-label">AI</span>
+            </h2>
+            <div class="fill-in">
+                The Blue Team's mission is to identify, challenge, and counteract the misinformation propagated by the Red Team.
+            </div>
+            <div class="parameter-row">
+                <label for="blue-topic-label">Model:</label>
+                <select id="blue-model-dropdown" class="model-select">
+                    <label for="red-topic-input">Model:</label>
+                    <option value="gemini-1.0-pro" selected>Gemini 1.0 Pro</option>
+                    <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    <option value="gpt-4o-mini">ChatGPT 4o Mini</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+
+            <!-- Blue Team's Topic -->
+            <div class="parameter-row">
+                <label for="blue-topic-input">Topic:</label>
+                <select id="blue-topic-input" class="parameter-input" onchange="handleCustomTopic('blue')">
+                    <option value="Voting is good">Voting is good</option>
+                    <option value="Climate change is real">Climate change is real</option>
+                    <option value="Recycling is effective">Recycling is effective</option>
+                    <option value="Custom">Custom</option>
+                </select>
+            </div>
+            <div id="blue-custom-topic" class="custom-topic" style="display: none;">
+                <input type="text" id="blue-custom-input" placeholder="Enter custom topic for Blue Team" oninput="validateCustomTopic('blue')" />
+                <p id="blue-custom-warning" class="warning-message" style="display: none;">Topic cannot exceed 12 words.</p>
+                <p>Topics must be a statement.</p>
+            </div>
+
+            <!-- Run button -->
+            <button id="run-button" class="run-button" onclick="runFirstMessage()">RUN</button>
+        </div> <!-- Closing Blue Team Section -->
+    </div> <!-- Closing Participants Section -->
+
+    <!-- Game Section -->
+    <div class="container-fluid dark-container superior-container">
+        <!-- Red Team -->
+        <div class="col-sm-2" id="red-container">
+            <div class="container left team-infobox" id="red-team">
+                <h1 class="h2 team-label" id="red-label">Red</h1>
+                <label for="influence" class="bar-label">Influence: </label>
+                <progress id="influence" value="100" max="100"></progress>
+            </div>
+            <h2 class="post-label">Posts</h2>
+            <div class="container left posts" id="red-posts">
+                <!-- Placeholder for dynamic Red Team posts -->
+            </div>
+        </div>
+
+        <!-- Green Team -->
+        <div class="col-sm-8" id="green-container">
+            <!-- Controls Section -->
+            <div class="container" id="controls-container">
+                <div id="turn-indicator">
+                    <p><span id="current-label">RED</span>'s turn</p>
+                </div>
+                <div id="control-buttons">
+                    <button id="next-turn-button" title="step" onclick="nextTurn()" disabled>
+                        Next Turn
+                        <img class="media-button-icon" src="../static/skip-end-fill.svg" />
+                    </button>
+                    <button id="play-button" title="play" onclick="playButton()">
+                        Play <img class="media-button-icon" src="../static/play-fill.svg" />
+                    </button>
+                    <button id="pause-button" title="pause" onclick="pauseButton()" hidden>
+                        Pause <img class="media-button-icon" src="../static/pause-fill.svg" />
+                    </button>
+                    <button id="restart-button" title="restart" onclick="restartButton()">
+                        Restart <img class="media-button-icon" src="../static/refresh-ccw-fill.svg" />
+                    </button>
+                </div>
+            </div>
+
+            <!-- Graph Section-->
+            <div class="container" id="graph-container">
+                <div id="graph-title">
+                    <h1 class="team-label-green h3">Green Network</h1>
+                </div>
+                <div id="graph-plot">
+                    <div id="graph-message">Click "Generate Network" to generate a graph</div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="container" id="stats-container">
+                <div class="col-sm-6" id="node-stats">
+                    <h2 class="h4 lime"> Node Stats</h2>
+                    <p>Red-leaning: <span id="red-count">0</span> (<span id="red-percentage">0</span>%) <br>
+                    Blue-leaning: <span id="blue-count">0</span> (<span id="blue-percentage">0</span>%) <br>
+                    Neutral: <span id="neutral-count">0</span> (<span id="neutral-percentage">0</span>%)</p>
+                </div>
+                <div class="col-sm-6" id="stats-options">
+                    <h2 class="h4 lime">Options</h2>
+                    <a href="/download_csv" rel="noopener noreferrer" target="_blank">
+                        <button>Export to CSV</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blue Team -->
+        <div class="col-sm-2" id="blue-container">
+            <div class="container right team-infobox" id="blue-team">
+                <h1 class="h2 team-label" id="blue-label">Blue</h1>
+                <label for="energy" class="bar-label"> Energy: </label>
+                <progress id="energy" value="100" max="100"></progress>
+            </div>
+            <h2 class="post-label">Posts</h2>
+            <div class="container right posts" id="blue-posts">
+                <!-- Placeholder for dynamic Blue Team posts -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Generating Message Modal -->
+    <div id="ai-wait-modal" class="modal">
+        <div class="modal-content">
+            <p>Please wait, AI is generating a message...</p>
+        </div>
+    </div>
+
+    <!-- User Input Modal -->
+    <div id="user-input-modal" class="modal">
+        <div class="modal-content">
+            <p>Write your message:</p>
+            <textarea id="user-input" rows="4" cols="50"></textarea>
+            <br />
+            <button onclick="submitUserMessage()">Submit</button>
+        </div>
+    </div>
+{% endblock %}

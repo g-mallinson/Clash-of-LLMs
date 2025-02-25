@@ -1,0 +1,28 @@
+@import url("https://fonts.cdnfonts.com/css/games");
+
+p {
+  line-height: 2;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.title {
+  align-items: center;
+  font-family: "Games", sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  padding: 15px;
+}
+
+.subtitle {
+  font-size: 25px;
+  margin-top: 10px;
+}

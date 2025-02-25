@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="about">
+      <h1>About Us</h1>
+      <h2>Overview</h2>
+      <p>
+        "Clash of LLMs" is a simulation that allows researchers and developers
+        to explore the dynamics of misinformation and its countermeasures using
+        machine learning models (LLMs). In this game,  you control how narratives - both true and misleading - spread within a community of interconnected nodes. The simulation mimics real-world information warfare, allowing you to experiment with strategies for spreading or debunking messages. How will the public respond? What factors influence the spread of misinformation? Discover the power of AI in shaping narratives. The simulation is designed around three distinct teams: Red, Blue and Green.
+      </p>
+    </div>
+    <div class="features">
+        <h2>ABOUT THE GAME</h2>
+        <p>Clash of LLMs is an AI-driven simulation designed to explore how information, whether true or false, spreads through a network. With a focus on misinformation and the role of debunking efforts, this simulation lets users experience the complex dynamics of information warfare. The game features Red, Blue, and Green teams, each representing different aspects of this information flow.</p>
+        <ul>
+          <li>Red Team: Responsible for spreading misleading information.</li>
+          <li>Blue Team: Responsible for countering the Red Team's misinformation by sending corrective or debunking messages.</li>
+          <li>Green Team: Representing the public, modeled as a network of nodes. These nodes react to the messages from both the Red and Blue teams potentially shifting their beliefs based on the information received. Their responses are influenced by network structure, message potency, and uncertainty.</li>
+        </ul>
+        <p>The system visually repersents these interactions on a dynamic graph where the state of the Green Team changes based on the influence of both Red and Blue Teams. Researches and developes interested in machine learning can use this tool to analyse the impact of misinformation and the effectiveness of countermeasures in real time. This simulation offers customisable parameters, allowing users to adjust the uncertainty range, the number of nodes and the probability of connections between nodes. </p>
+    </div>
+
+    <div class="features">
+      <h2>KEY FEATURES</h2>
+      <ul>
+        <li>
+          Customisable simulation - Adjust network parameters and AI models to
+          explore various models
+        </li>
+        <li>
+          Real-time feedback - View statistics, potency of messages, and
+          energy/reputation levels as the simulation unfolds.
+        </li>
+        <li>
+          Data visualisation - Graphs and statistics to track the spread of
+          information.
+        </li>
+      </ul>
+    </div>
+
+    <div class="features">
+        <h2>HOW IT WORKS</h2>
+        <div class="content">
+            <div class="text">
+                <p style="font-weight: bold;">Each team has their own roles:
+                <ul>
+                    <li>Red Team: Spread misleading information</li>
+                    <li>Blue Team: Debunking the messages</li>
+                    <li>Green: Public reacting to both teams</li>
+                </ul>
+                </p>
+                <p style="font-weight:bold">Parameters:
+                <ul>
+                    <li>Number of nodes</li>
+                    <li>Probability of connections</li>
+                    <li>Uncertainty range</li>
+                </ul>
+                </p>
+            </div>
+            <div class="image">
+                <!-- image holder -->
+                <img id="screenshot" src="{{url_for('static', filename='screenshot.png')}}" alt="llm" />
+            </div>
+        </div>
+        <div>
+            <p>Red team shall make the first move and initiate the simulation by spreading misinformation. The Blue team will then respond with a debunking message, followed by another piece of misinformation from the Red team and so on. Throughout this process, the graph will update in real-time, while the Green team adjusts their beliefs based on the information from both teams.</p>
+        </div>
+    </div>
+
+    <div class="features">
+        <h2>GET STARTED</h2>
+        <p>Ready to explore the Clash of LLMs? Click the button below to start the simulation.</p>
+        <div class="button-container">
+          <a href="{{url_for('game')}}" class="button" style="justify-content:center; margin-top: 20px; font-family: JetBrains Mono, monospace;">Start</a>
+        </div>
+    </div>
+
+    <footer> 
+        <p>"Clash of LLMs" 2024 GNU GPL LICENSE</p>
+    </footer>
+{% endblock %}

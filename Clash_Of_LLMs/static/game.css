@@ -1,0 +1,473 @@
+html,
+body {
+  height: 100%;
+}
+
+/* Styles for the Participants Section */
+#participants-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: black;
+  margin-bottom: 0;
+  border-bottom: 1px solid white; /* Adds a white line at the bottom */
+}
+
+.team-section,
+.parameter-section {
+  flex: 1;
+  text-align: center;
+  margin: 0 20px;
+  color: white;
+}
+
+#green-team-section {
+    flex: 2;
+}
+
+.ai-label {
+  font-size: 0.8em;
+  font-weight: normal;
+  border: 1px solid grey;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: lightgrey;
+  color: black;
+}
+
+.model-select,
+.run-button {
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  padding: 5px 10px;
+  font-size: 1em;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.parameter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.parameter-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.parameter-row label {
+  margin-right: 10px;
+  text-align: right;
+  color: white;
+}
+
+.parameter-row .parameter-input {
+    text-align: center;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.run-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.fill-in {
+  margin-bottom: 20px;
+  color: white;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 150px;
+  margin: auto;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+/* Color-specific Styles */
+.team-label-red {
+    color: rgb(227, 62, 62);
+}
+
+.team-label-blue {
+    color: rgb(34, 88, 214);
+}
+
+.team-label-green {
+    color: rgb(113, 190, 113);
+}
+
+/* Ensure existing layout remains unchanged */
+.superior-container {
+  display: flex;
+  padding: 0;
+  height: 100%;
+  margin-top: 0;
+  background-color: black; /* Match background color to remove any line/gap */
+  border-top: 2px solid white; /* Adds a white line at the top */
+}
+
+h1 {
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0.5rem;
+}
+
+.post-label {
+  font-size: large;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0;
+  padding: 0;
+}
+
+/* Color-specific Styles */
+.team-label-red {
+  color: rgb(227, 62, 62);
+}
+
+.team-label-blue {
+  color: rgb(34, 88, 214);
+}
+
+.team-label-green {
+  color: rgb(113, 190, 113);
+}
+
+.example-topics-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.example-topic {
+  padding: 10px;
+  font-size: smaller;
+  color: #888;
+  flex: 1;
+}
+
+.example-topic strong {
+  display: block;
+}
+
+.example-topic ul {
+  text-align: left;
+  list-style-type: disc;
+}
+
+/* Both Teams */
+.team-infobox {
+  padding: 10px;
+    color: #00ff99;
+}
+
+/* Red Team */
+
+#red-container {
+  background-color: rgb(20, 0, 0); /* Change background to black */
+  color: rgb(227, 62, 62); /* Change text color to a nice red */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#red-label {
+  color: rgb(227, 62, 62);
+}
+
+#red-team {
+  border-bottom: rgb(40, 0, 0) 2px solid;
+}
+
+#influence::-webkit-progress-value {
+  background-color: red;
+}
+
+/* Green Team */
+
+#green-container {
+  flex: 3;
+  height: 100%;
+  border-color: hsl(0, 0%, 20%);
+  border-style: solid;
+  border-width: 0 1px;
+}
+
+#green-label {
+   color: #00ff99;
+}
+
+#controls-container {
+  display: flex;
+  align-items: center;
+}
+
+#turn-indicator {
+  text-align: center;
+  flex: 1;
+}
+
+#control-buttons {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+#control-buttons button {
+  width: 30%;
+  height: 50%;
+}
+
+.media-button-icon {
+  height: 100%;
+}
+
+#graph-container {
+  height: 75%;
+}
+
+#graph-title {
+  position: relative;
+  z-index: 1;
+  top: 10px;
+}
+
+#graph-plot {
+  text-align: center;
+  background-color: #111;
+  position: relative;
+  top: -40px; /*HACK*/
+  height: 100%;
+}
+
+#graph-message{
+    position: relative;
+    top: 45%;
+    color: #999;
+}
+
+#mynetwork, .card{
+    background-color: #222;
+    height: 100%;
+    border: none
+} 
+
+#mynetwork{
+    padding: 5px
+}
+
+#stats-container {
+    display: flex;
+    min-height: 0;
+    width: 100%;
+}
+
+/* Blue Team */
+
+#blue-container {
+  background-color: rgb(0, 0, 20);
+  color: rgb(34, 88, 214); /* Change text color to a nice blue */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#blue-team {
+  background-color: black; /* Change background to black */
+  color: rgb(34, 88, 214); /* Change text color to a nice blue */
+}
+
+.bar-label {
+  font-weight: bold;
+  color: white;
+}
+
+progress {
+  background: white; /* Set the unfilled portion of the progress bar to white */
+}
+
+#influence::-webkit-progress-value {
+  background-color: rgb(227, 62, 62); /* Keep the filled portion red */
+}
+
+#energy::-webkit-progress-value {
+  background-color: rgb(34, 88, 214); /* Blue color for Blue Team energy */
+}
+
+#energy::-moz-progress-bar {
+  background-color: rgb(34, 88, 214); /* Blue color for Blue Team energy */
+}
+
+
+#energy::-ms-fill {
+  background-color: rgb(34, 88, 214); /* Blue color for Blue Team energy */
+}
+
+progress:hover:before {
+  display: inline;
+  content: " "attr(value)" / "attr(max)" ";
+  position: absolute;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: black;
+
+}
+
+/* Posts */
+.posts {
+  padding: 10px 10px;
+}
+
+.red-post-content,
+.blue-post-content {
+  position: relative; /* Add this to position the triangle relative to the post box */
+  background-color: white;
+  width: 100%; /* Make the post fill the container's width */
+  height: fit-content;
+  border-radius: 8px;
+  box-shadow: 5px 6px 3px black;
+  border: 2px solid white;
+  padding: 10px; /* Add some padding inside the posts */
+  box-sizing: border-box; /* Ensure padding is included in width */
+  margin-bottom: 20px; /* Add space between posts */
+}
+
+.red-post-content::before {
+  content: "";
+  position: absolute;
+  left: 15px; /* Move triangle to the bottom left inside the post */
+  bottom: -15px; /* Position the triangle outside the bottom of the post */
+  width: 0;
+  height: 0;
+  border-top: 15px solid white; /* Triangle color */
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.blue-post-content::before {
+  content: "";
+  position: absolute;
+  right: 15px; /* Move triangle to the bottom right inside the post */
+  bottom: -15px; /* Position the triangle outside the bottom of the post */
+  width: 0;
+  height: 0;
+  border-top: 15px solid white; /* Triangle color */
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+/* Ensure post content text colors match the container */
+.red-post-content > p {
+  color: rgb(227, 62, 62); /* Red text inside the post */
+  font-size: 0.8em; /* Adjusted font size */
+}
+
+.blue-post-content > p {
+  color: rgb(34, 88, 214); /* Blue text inside the post */
+  font-size: 0.8em; /* Adjusted font size */
+}
+
+.potency {
+  color: white;
+}
+
+#red-posts,
+#blue-posts {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+}
+
+/* Modal (centered and bigger) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999; /* Stay on top */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  width: 400px; /* Increase the width of the modal */
+  height: auto; /* Let the height adjust based on content */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #000; /* Black background */
+  color: white; /* White text */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2em;
+  width: 100%; /* Make modal content fit within modal width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+/* Make textarea smaller */
+#user-input {
+  width: 100%;
+  padding: 5px; /* Reduce padding */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 0.9em; /* Smaller font size */
+}
+
+
+/* Style for the custom input field */
+.custom-topic {
+  margin-top: 10px;
+  color: white;
+}
+
+.custom-topic input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.custom-topic p {
+  font-size: smaller;
+  color: #888;
+}

@@ -1,0 +1,4 @@
+FLASK_APP=run.py
+OPENAI_API_KEY=api_key_here
+GEMINI_API_KEY_1=api_key_here
+GEMINI_API_KEY_2=api_key_here
